@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عباسكو | لوحة الإدارة</title><link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+<div class="announcement">ABASCO ADMIN • لوحة عباسكو الداخلية</div>
+<header class="admin-header section-shell">
+  <a class="brand" href="index.html"><span class="brand-mark">A</span><span><strong>ABASCO</strong><small>ADMIN DESK</small></span></a>
+  <a class="btn ghost" href="index.html">← العودة للمتجر</a>
+</header>
+<main class="section-shell admin-main">
+  <div class="admin-title"><div><span class="eyebrow">وراء الدكانة</span><h1>لوحة التحكم</h1></div><button class="btn primary" id="exportBtn">تصدير البيانات</button></div>
+  <section class="stats-grid">
+    <div class="stat"><small>منتجات</small><strong id="productStat">0</strong><span>في الكتالوج</span></div>
+    <div class="stat"><small>طلبات محفوظة</small><strong id="orderStat">0</strong><span>على هذا الجهاز</span></div>
+    <div class="stat"><small>قيمة آخر طلب</small><strong id="lastTotal">0</strong><span>ج.م</span></div>
+    <div class="stat"><small>عناصر السلة</small><strong id="cartStat">0</strong><span>حاليًا</span></div>
+  </section>
+
+  <section class="admin-panel">
+    <div class="panel-head"><div><span class="eyebrow">الكتالوج</span><h2>إضافة منتج تجريبي</h2></div></div>
+    <form id="productForm" class="admin-form">
+      <input name="name" required placeholder="اسم المنتج">
+      <select name="category"><option>جرابات</option><option>شواحن</option><option>سماعات</option><option>كابلات</option><option>حماية</option><option>حوامل</option><option>باور بانك</option></select>
+      <input name="price" required type="number" min="0" placeholder="السعر">
+      <input name="old" type="number" min="0" placeholder="السعر القديم">
+      <input name="desc" placeholder="وصف مختصر">
+      <button class="btn primary" type="submit">+ إضافة</button>
+    </form>
+    <p class="admin-note">هذه النسخة Front-end فقط؛ الإضافة تحفظ المنتج محليًا في المتصفح. لربطها بقاعدة بيانات أو استقبال طلبات حقيقية نضيف Backend/API لاحقًا.</p>
+  </section>
+
+  <section class="admin-panel">
+    <div class="panel-head"><div><span class="eyebrow">المخزن</span><h2>المنتجات</h2></div><button class="text-btn" id="resetProducts">استرجاع المنتجات الأصلية</button></div>
+    <div class="admin-table-wrap"><table><thead><tr><th>المنتج</th><th>التصنيف</th><th>السعر</th><th>الإجراء</th></tr></thead><tbody id="adminProducts"></tbody></table></div>
+  </section>
+
+  <section class="admin-panel">
+    <div class="panel-head"><div><span class="eyebrow">آخر حركة</span><h2>آخر طلب محفوظ</h2></div></div>
+    <div id="lastOrder" class="last-order"></div>
+  </section>
+</main>
+<script>
+const baseProducts = [
+{id:1,name:"جراب جلد كلاسيك",category:"جرابات",price:249,old:299,desc:"ملمس جلد هادي وحماية محترمة",icon:"▣"},
+{id:2,name:"شاحن حائط 25W",category:"شواحن",price:399,old:449,desc:"PD سريع بحجم صغير",icon:"⚡"},
+{id:3,name:"كابل Type-C متين",category:"كابلات",price:159,old:199,desc:"طول 1.5 متر ومغلف بالقماش",icon:"⌁"},
+{id:4,name:"سماعة بلوتوث Retro",category:"سماعات",price:699,old:799,desc:"صوت دافئ وشكل من أيام زمان",icon:"◉"},
+{id:5,name:"اسكرينة حماية كاملة",category:"حماية",price:119,old:149,desc:"وضوح عالي وحواف ناعمة",icon:"◇"},
+{id:6,name:"حامل موبايل للمكتب",category:"حوامل",price:289,old:329,desc:"ثابت ويتظبط على كذا زاوية",icon:"⌂"},
+{id:7,name:"باور بانك 10000mAh",category:"باور بانك",price:649,old:749,desc:"بطارية احتياطية عملية وخفيفة",icon:"▰"},
+{id:8,name:"جراب شفاف ضد الصدمات",category:"جرابات",price:199,old:229,desc:"شفاف، مرن، وحواف حماية",icon:"□"},
+{id:9,name:"شاحن سيارة Dual USB",category:"شواحن",price:279,old:319,desc:"منفذين للشحن داخل العربية",icon:"◈"},
+{id:10,name:"كابل Lightning 1m",category:"كابلات",price:139,old:169,desc:"كابل يومي للاستخدام العادي",icon:"⌁"},
+{id:11,name:"سماعة سلك كلاسيك",category:"سماعات",price:179,old:219,desc:"سماعة سلك بسيطة وموثوقة",icon:"♫"},
+{id:12,name:"ستاند سيارة مغناطيسي",category:"حوامل",price:329,old:379,desc:"تركيب سريع ورؤية مريحة",icon:"⊙"}
+];
+const getProducts=()=>JSON.parse(localStorage.getItem("abascoAdminProducts")||"null")||baseProducts;
+const money=n=>Number(n).toLocaleString("ar-EG");
+function render(){
+ const p=getProducts(), cart=JSON.parse(localStorage.getItem("abascoCart")||"[]"), order=JSON.parse(localStorage.getItem("abascoLastOrder")||"null");
+ productStat.textContent=p.length; cartStat.textContent=cart.reduce((s,x)=>s+x.qty,0); orderStat.textContent=order?1:0; lastTotal.textContent=order?money(order.total):"0";
+ adminProducts.innerHTML=p.map(x=>`<tr><td><b>${x.name}</b><small>${x.desc||""}</small></td><td>${x.category}</td><td>${money(x.price)} ج.م</td><td><button class="table-btn" data-del="${x.id}">حذف</button></td></tr>`).join("");
+ lastOrder.innerHTML=order?`<div class="order-paper"><b>${order.number}</b><span>${order.name} — ${order.phone}</span><span>${order.area} — ${order.address}</span><strong>${money(order.total)} ج.م</strong></div>`:`<div class="empty-state">لا يوجد طلب محفوظ حاليًا.</div>`;
+}
+productForm.onsubmit=e=>{
+ e.preventDefault();const d=Object.fromEntries(new FormData(e.target));const p=getProducts();
+ p.push({id:Date.now(),name:d.name,category:d.category,price:Number(d.price),old:Number(d.old)||Number(d.price),desc:d.desc,icon:"✦"});
+ localStorage.setItem("abascoAdminProducts",JSON.stringify(p));e.target.reset();render();
+};
+document.addEventListener("click",e=>{
+ if(e.target.dataset.del){const p=getProducts().filter(x=>x.id!==Number(e.target.dataset.del));localStorage.setItem("abascoAdminProducts",JSON.stringify(p));render();}
+});
+resetProducts.onclick=()=>{localStorage.removeItem("abascoAdminProducts");render()};
+exportBtn.onclick=()=>{
+ const data={products:getProducts(),lastOrder:JSON.parse(localStorage.getItem("abascoLastOrder")||"null"),customer:JSON.parse(localStorage.getItem("abascoCustomer")||"null")};
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="abasco-data.json";a.click();URL.revokeObjectURL(a.href);
+};
+render();
+</script>
+</body></html>
