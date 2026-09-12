@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abasco - عباسكو | متجر إكسسوارات الموبايل">
+  <title>عباسكو | Abasco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">عباسكو — حاجات موبايل على أصولها • شحن سريع • خدمة محترمة</div>
+
+  <header class="site-header">
+    <div class="top-line">
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">☰</button>
+      <a class="brand" href="#home" aria-label="عباسكو">
+        <span class="brand-mark">A</span>
+        <span>
+          <strong>ABASCO</strong>
+          <small>عباسكو • MOBILE GOODS</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <button class="header-link" id="accountBtn">♙ حسابي</button>
+        <button class="header-link cart-trigger" id="cartBtn">🛒 السلة <b id="cartCount">0</b></button>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#home">الرئيسية</a>
+      <a href="#shop">المتجر</a>
+      <a href="#offers">العروض</a>
+      <a href="#new">وصل حديثًا</a>
+      <a href="#about">حكاية عباسكو</a>
+      <a href="#contact">اتصل بنا</a>
+    </nav>
+
+    <div class="ticker">
+      <span>★</span> اختار موبايلك وسيب الباقي علينا
+      <span>★</span> جرابات • شواحن • سماعات • حماية • كابلات • حوامل
+      <span>★</span>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <div class="eyebrow">من محل زمان… لجيبك النهارده</div>
+        <h1>إكسسوارات<br><em>تليق بموبايلك.</em></h1>
+        <p>واجهة مريحة، اختيار واضح، ومنتجات بنحب نبيعها وإحنا واثقين منها. عباسكو مش مجرد متجر… دي دكانة الموبايل بتاعة زمان.</p>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#shop">لفّ في الدكانة ←</a>
+          <a class="btn ghost" href="#offers">شوف العروض</a>
+        </div>
+        <div class="hero-note"><span>✓</span> الدفع عند الاستلام متاح &nbsp; • &nbsp; استبدال سهل</div>
+      </div>
+      <div class="hero-display">
+        <div class="display-frame">
+          <div class="display-label">ABASCO'S<br>TELEPHONE GOODS</div>
+          <div class="display-phone">
+            <div class="phone-camera"></div>
+            <div class="phone-screen">
+              <span>ABASCO</span>
+              <b>HELLO.</b>
+            </div>
+          </div>
+          <div class="display-accessory accessory-one">CASE</div>
+          <div class="display-accessory accessory-two">CABLE</div>
+          <div class="display-accessory accessory-three">POWER</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="categories section-shell" aria-label="التصنيفات">
+      <div class="section-heading">
+        <span>اختار الرف</span>
+        <h2>كل حاجة في مكانها</h2>
+        <p>بدل ما تلف كتير، قول عايز إيه وإحنا نوصلك له.</p>
+      </div>
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <section class="shop section-shell" id="shop">
+      <div class="shop-head">
+        <div class="section-heading compact">
+          <span>دكانة عباسكو</span>
+          <h2>المعروض النهارده</h2>
+        </div>
+        <div class="shop-tools">
+          <label class="search-box">⌕ <input id="searchInput" type="search" placeholder="دور على جراب، شاحن..." aria-label="بحث"></label>
+          <select id="sortSelect" aria-label="ترتيب المنتجات">
+            <option value="featured">ترتيب عباسكو</option>
+            <option value="low">السعر: الأقل</option>
+            <option value="high">السعر: الأعلى</option>
+            <option value="new">الأحدث</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-row" id="filterRow"></div>
+      <div class="products-grid" id="productsGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>ملقيناش اللي بتدور عليه… جرّب كلمة تانية.</div>
+    </section>
+
+    <section class="offer-banner section-shell" id="offers">
+      <div>
+        <span class="eyebrow">رف العروض</span>
+        <h2>لما تاخد أكتر… وفّر أكتر.</h2>
+        <p>خصم تلقائي على بعض الباكدجات المختارة — من غير كوبونات ولا وجع دماغ.</p>
+      </div>
+      <div class="offer-stamp">خصم<br><strong>25%</strong></div>
+      <a href="#shop" class="btn light">شوف الباكدجات</a>
+    </section>
+
+    <section class="new-section section-shell" id="new">
+      <div class="section-heading">
+        <span>لسه داخلين المخزن</span>
+        <h2>وصل حديثًا</h2>
+      </div>
+      <div class="new-arrivals" id="newArrivals"></div>
+    </section>
+
+    <section class="trust section-shell">
+      <div class="trust-card"><b>01</b><strong>اختيار واضح</strong><span>مواصفات وأسعار قدام عينك.</span></div>
+      <div class="trust-card"><b>02</b><strong>شحن للباب</strong><span>اكتب عنوانك وخلاص.</span></div>
+      <div class="trust-card"><b>03</b><strong>ضمان وراحة</strong><span>مش هنسيبك بعد البيع.</span></div>
+      <div class="trust-card"><b>04</b><strong>دعم بشري</strong><span>اسألنا قبل ما تشتري.</span></div>
+    </section>
+
+    <section class="story section-shell" id="about">
+      <div class="story-sign">AB</div>
+      <div>
+        <span class="eyebrow">حكاية صغيرة</span>
+        <h2>عباسكو بطابع الدكاكين القديمة.</h2>
+        <p>فكرنا: ليه كل متاجر الإنترنت شبه بعض؟ فعملنا عباسكو كأنه محل قديم اتفتح جوه الشاشة. خش، بص على الرفوف، اختار براحتك، واسأل لو محتار.</p>
+        <p>الألوان، الورق، اللافتات، والأسعار المكتوبة بخط واضح… كلها معمولة عشان تحس إنك بتشتري من مكان له شخصية.</p>
+      </div>
+    </section>
+
+    <section class="newsletter section-shell" id="contact">
+      <div>
+        <span class="eyebrow">خليك على الرف الأول</span>
+        <h2>عروض جديدة من غير دوشة.</h2>
+      </div>
+      <form id="newsletterForm">
+        <input type="email" required placeholder="بريدك الإلكتروني">
+        <button class="btn primary" type="submit">اشترك</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner section-shell">
+      <div>
+        <div class="footer-brand">ABASCO</div>
+        <p>إكسسوارات موبايل بروح مصرية قديمة.</p>
+      </div>
+      <div><b>الدكانة</b><a href="#shop">كل المنتجات</a><a href="#offers">العروض</a><a href="#new">وصل حديثًا</a></div>
+      <div><b>المساعدة</b><a href="#contact">تواصل معنا</a><a href="#" id="shippingLink">الشحن والاستبدال</a><a href="#" id="privacyLink">الخصوصية</a></div>
+      <div><b>الفرع الإلكتروني</b><span>السبت — الخميس</span><span>10 ص — 10 م</span><span>0123 456 7890</span></div>
+    </div>
+    <div class="copyright">© 2026 ABASCO — معمول بحب، ومش معمول زي الباقي.</div>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="سلة المشتريات">
+    <div class="drawer-head"><h2>سلة عباسكو</h2><button class="close-btn" id="closeCart">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="total-line"><span>الإجمالي</span><strong id="cartTotal">0 ج.م</strong></div>
+      <button class="btn primary full" id="checkoutBtn">إتمام الطلب</button>
+      <button class="text-btn" id="clearCart">تفريغ السلة</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <dialog id="checkoutDialog" class="modal">
+    <button class="modal-close" data-close>×</button>
+    <div class="modal-title"><span>ورقة الطلب</span><h2>بيانات التوصيل</h2></div>
+    <form id="checkoutForm">
+      <div class="form-grid">
+        <label>الاسم<input name="name" required placeholder="اسمك بالكامل"></label>
+        <label>الموبايل<input name="phone" required inputmode="tel" placeholder="01xxxxxxxxx"></label>
+        <label class="wide">المحافظة / المنطقة<input name="area" required placeholder="مثال: القاهرة - مدينة نصر"></label>
+        <label class="wide">العنوان بالتفصيل<textarea name="address" required rows="3" placeholder="الشارع، العمارة، الدور..."></textarea></label>
+        <label>طريقة الدفع<select name="payment"><option>الدفع عند الاستلام</option><option>تحويل بنكي</option></select></label>
+        <label>ملاحظات<input name="notes" placeholder="اختياري"></label>
+      </div>
+      <div class="order-summary" id="checkoutSummary"></div>
+      <button class="btn primary full" type="submit">تأكيد الطلب</button>
+    </form>
+  </dialog>
+
+  <dialog id="accountDialog" class="modal small-modal">
+    <button class="modal-close" data-close>×</button>
+    <div class="modal-title"><span>دفتر الزباين</span><h2>حسابي</h2></div>
+    <p>احفظ بياناتك على جهازك عشان الطلب الجاي يبقى أسرع.</p>
+    <form id="accountForm">
+      <label>الاسم<input name="name" required placeholder="اسمك"></label>
+      <label>رقم الموبايل<input name="phone" required placeholder="01xxxxxxxxx"></label>
+      <button class="btn primary full" type="submit">حفظ البيانات</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
